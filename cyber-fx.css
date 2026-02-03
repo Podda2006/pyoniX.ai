@@ -1,53 +1,84 @@
-/** cyber-fx.css - Advanced Post-Processing Effects **/
-
-/* CRT Scanline Effect */
-.crt-overlay {
+/* Deep Space Starfield Background */
+.starfield-bg {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    background-size: 100% 3px, 3px 100%;
-    z-index: 1000;
-    pointer-events: none;
-    opacity: 0.5;
+    background: #0a0a1a url('https://www.transparenttextures.com/patterns/stardust.png') repeat; /* තරු රටාව */
+    animation: starfieldPan 200s linear infinite; /* තරු සෙමින් චලනය වීමට */
+    z-index: -2;
+    opacity: 0.8;
 }
 
-/* Screen Flicker Animation */
-body::after {
-    content: " ";
-    display: block;
+@keyframes starfieldPan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+/* Gradient Overlay for Depth */
+.gradient-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Glitch Effect for pyoniX.ai Title */
+.glitch[data-text]::before, .glitch[data-text]::after {
+    content: attr(data-text);
     position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: rgba(18, 16, 16, 0.1);
-    opacity: 0;
-    z-index: 1001;
-    pointer-events: none;
-    animation: flicker 0.15s infinite;
+    top: 0; left: 0;
+    width: 100%;
+    text-shadow: 2px 0 var(--neon-blue), -2px 0 var(--neon-purple);
+    clip-path: inset(0 0 100% 0);
+    animation: glitch-anim 2s infinite alternate-reverse;
 }
 
-@keyframes flicker {
-    0% { opacity: 0.27861; }
-    5% { opacity: 0.34769; }
-    10% { opacity: 0.23604; }
-    15% { opacity: 0.90626; }
-    20% { opacity: 0.18128; }
-    100% { opacity: 0.1; }
+.glitch[data-text]::after {
+    text-shadow: -2px 0 var(--neon-purple), 2px 0 var(--neon-blue);
+    animation: glitch-anim-2 3s infinite alternate-reverse;
 }
 
-/* Neon Glows for UI Elements */
-.msg-tag {
-    text-shadow: 0 0 5px var(--neon-red);
-    letter-spacing: 1px;
+@keyframes glitch-anim {
+    0% { clip-path: inset(80% 0 0 0); }
+    20% { clip-path: inset(40% 0 40% 0); }
+    100% { clip-path: inset(0 0 80% 0); }
+}
+@keyframes glitch-anim-2 {
+    0% { clip-path: inset(20% 0 60% 0); }
+    30% { clip-path: inset(70% 0 10% 0); }
+    100% { clip-path: inset(0 0 90% 0); }
 }
 
-.cyan-text { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
-.neon-red-text { color: var(--neon-red); text-shadow: 0 0 8px var(--neon-red); }
+/* Pulsating Dot for Status */
+.pulsating-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--neon-blue);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(0, 234, 255, 0.7);
+    animation: pulse 1.5s infinite;
+}
 
-/* Message Bubble Styling */
-.msg-content {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #cbd5e1;
-    word-wrap: break-word;
-    white-space: pre-wrap;
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 234, 255, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 234, 255, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 234, 255, 0); }
+}
+
+/* AI Message Styling */
+.ai-wrapper .msg-content {
+    background: rgba(0, 10, 30, 0.6); /* Darker glass for AI messages */
+    border-left: 3px solid var(--neon-blue);
+    padding: 15px;
+    border-radius: 12px;
+    margin-right: auto; /* වමට align කරන්න */
+    max-width: 80%;
+}
+.user-wrapper .msg-content {
+    background: rgba(30, 0, 30, 0.6); /* User messages ටිකක් දම් පාටින් */
+    border-right: 3px solid var(--neon-purple);
+    padding: 15px;
+    border-radius: 12px;
+    margin-left: auto; /* දකුණට align කරන්න */
+    max-width: 80%;
 }
