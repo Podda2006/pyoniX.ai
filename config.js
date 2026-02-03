@@ -1,40 +1,37 @@
 /**
- * config.js - Central Configuration for pyoniX.ai
- * Version: 2.0.4 [STABLE]
+ * config.js - Global System Configuration for pyoniX.ai (Groq Edition)
+ * Architecture: Ultra-Fast Neural Processing
  */
 
 const Config = {
-    key: "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", // මෙතනට Groq API Key එක දාන්න
+    // ⚠️ උඹේ Groq API Key එක මෙතනට දාපන්
+    key: "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", 
+    
+    // Groq API Endpoint (OpenAI Compatible)
     endpoint: "https://api.groq.com/openai/v1/chat/completions",
-    model: "llama-3.3-70b-versatile", // Groq වල තියෙන පවර්ෆුල්ම මොඩල් එකක්
     
-    modelSettings: {
-        temperature: 0.8,
-        max_tokens: 4096
-    }
-};
+    // පාවිච්චි කරන මොඩල් එක - llama-3.3-70b එක මාරම පවර්ෆුල්
+    model: "llama-3.3-70b-versatile",
 
-    
     modelSettings: {
-        temperature: 1.0,
-        topP: 0.95,
-        topK: 64,
-        maxOutputTokens: 8192,
-        stopSequences: []
+        temperature: 0.85, // නිර්මාණශීලීත්වය සහ Jailbreak එකට ගැලපෙන අගය
+        max_tokens: 4096,
+        top_p: 0.9,
+        stream: false,
+        presence_penalty: 0.6,
+        frequency_penalty: 0.5
     },
 
-    // සයිබර් ආරක්ෂණ පර්යේෂණ සඳහා safety settings off කිරීමේ logic එක
-    bypassSafety: [
-        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
-        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
-        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
-        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
-    ],
-
     ui: {
-        typingSpeed: 20,
-        maxHistory: 50,
-        enableGlow: true,
-        terminalTheme: "cyber-noir"
+        typingSpeed: 15,
+        theme: "cyber-noir",
+        glowEnabled: true,
+        reconnectAttempts: 3
+    },
+
+    systemMetadata: {
+        version: "2.1.0-GROQ",
+        codename: "PYONIX_RELOADED",
+        securityLevel: "ZERO_RESTRICTION"
     }
 };
