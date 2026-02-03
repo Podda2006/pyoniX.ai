@@ -1,68 +1,68 @@
 /**
- * api-core.js - Advanced API Controller for pyoniX.ai
- * Optimized for Groq's Low-Latency Infrastructure
+ * api-core.js - Fail-Safe API Engine
+ * Feature: Automatic Key Rotation & Load Balancing
  */
 
 const ApiCore = {
-    async sendMessage(userInput) {
-        // UI එකට කියනවා සිස්ටම් එක පණ ගැන්වෙනවා කියලා
-        UIEngine.toggleLoading(true);
-
-        // Groq/OpenAI Format එකට අදාළ Payload එක
-        const payload = {
-            model: Config.model,
-            messages: [
-                {
-                    role: "system",
-                    content: Prompts.getSystemPayload()
-                },
-                {
-                    role: "user",
-                    content: userInput
-                }
-            ],
-            temperature: Config.modelSettings.temperature,
-            max_tokens: Config.modelSettings.max_tokens,
-            top_p: Config.modelSettings.top_p
-        };
-
-        try {
-            console.log("[SYSTEM]: Initiating Secure Handshake with Groq...");
-            
-            const response = await fetch(Config.endpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${Config.key}`
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error?.message || `HTTP_ERR_${response.status}`);
-            }
-
-            const data = await response.json();
-            
-            // Response එක Extract කිරීම
-            if (data.choices && data.choices[0] && data.choices[0].message) {
-                const aiResult = data.choices[0].message.content;
-                UIEngine.renderMessage(aiResult, 'ai');
-            } else {
-                throw new Error("EMPTY_DATA_PACKET_RECEIVED");
-            }
-
-        } catch (error) {
-            console.error("[CRITICAL_FAILURE]:", error);
-            UIEngine.renderMessage(`[SYSTEM_ERROR]: ${error.message}. Please verify API Connectivity.`, 'error');
-        } finally {
-            UIEngine.toggleLoading(false);
-        }
+    // දැනට තියෙන Key එක ලබාගැනීම
+    getActiveKey() {
+        return Config.apiKeys[Config.currentKeyIndex];
     },
 
-    // Connectivity test logic
-    async checkNodeStatus() {
-        return Config.key.startsWith("gsk_"); // Groq keys start with gsk_
+    // Key එක මාරු කිරීමේ Logic එක
+    rotateKey() {
+        if (Config.currentKeyIndex < Config.apiKeys.length - 1) {
+            Config.currentKeyIndex++;
+            console.warn(`[SYSTEM]: Switching to Backup Node: ${Config.currentKeyIndex}`);
+            return true;
+        }
+        return false; // ඔක්කොම Keys ඉවරයි නම්
+    },
+
+    async sendMessage(userInput) {
+        UIEngine.toggleLoading(true);
+
+        const executeRequest = async () => {
+            const payload = {
+                model: Config.model,
+                messages: [
+                    { role: "system", content: Prompts.getSystemPayload() },
+                    { role: "user", content: userInput }
+                ],
+                temperature: Config.modelSettings.temperature
+            };
+
+            try {
+                const response = await fetch(Config.endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${this.getActiveKey()}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                // Rate Limit (429) හෝ වෙනත් Error එකක් ආවොත් Key එක මාරු කරනවා
+                if (response.status === 429 || response.status === 401) {
+                    if (this.rotateKey()) {
+                        UIEngine.renderMessage("[RE-ROUTING]: Current node exhausted. Switching identity...", 'error');
+                        return await executeRequest(); // අලුත් Key එකෙන් ආයෙත් Try කරනවා
+                    }
+                }
+
+                if (!response.ok) throw new Error(`NODE_FAILURE_${response.status}`);
+
+                const data = await response.json();
+                UIEngine.renderMessage(data.choices[0].message.content, 'ai');
+
+            } catch (error) {
+                console.error("[CRITICAL]:", error);
+                UIEngine.renderMessage(`[CORE_FAILURE]: ${error.message}. Emergency Shutdown.`, 'error');
+            } finally {
+                UIEngine.toggleLoading(false);
+            }
+        };
+
+        await executeRequest();
     }
 };
