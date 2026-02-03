@@ -4,7 +4,7 @@
  */
 
 const Config = {
-    key: "YOUR_GEMINI_API_KEY", // මෙතනට ඔයාගේ Key එක දාන්න
+    key: "AIzaSyBNQy1oAirbT3gPibYlLjg8JYWIcVSpaDw", // මෙතනට ඔයාගේ Key එක දාන්න
     endpoint: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
     
     modelSettings: {
