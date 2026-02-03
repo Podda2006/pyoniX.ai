@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="pyoniX.ai - Advanced Neural Interface">
-    <title>pyoniX.ai | Terminal_v2.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="pyoniX.ai - Advanced Deep-Space Neural Interface">
+    <title>pyoniX.ai | DEEP_CORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="cyber-fx.css">
     <link rel="stylesheet" href="animations.css">
@@ -15,61 +15,55 @@
         <div class="loader-content">
             <div class="glitch-text" data-text="PYONIX_INIT">PYONIX_INIT</div>
             <div class="loading-bar"><div class="progress"></div></div>
-            <div id="loader-status">CONNECTING_TO_CORE...</div>
+            <div id="loader-status">ESTABLISHING_NEURAL_LINK...</div>
         </div>
     </div>
 
     <div class="scanline"></div>
-    <div class="crt-overlay"></div>
-
-    <div id="app-grid">
+    <div class="starfield-bg"></div> <div class="gradient-overlay"></div> <div id="app-grid">
         <aside id="sidebar">
-            <div class="brand-box">
-                <h1 class="glitch" data-text="pyoniX.ai">pyoniX.ai</h1>
-                <span class="sub-label">NEURAL INTERFACE</span>
+            <div class="glass-pane sidebar-top">
+                <h1 class="brand-title glitch" data-text="pyoniX.ai">pyoniX.ai</h1>
+                <span class="sub-label">DEEP_CORE // v2.1</span>
+                <div class="status-indicator"><span id="api-status">OFFLINE</span></div>
             </div>
-            <div class="sidebar-nav">
-                <div class="nav-section">
-                    <span class="section-title">SYSTEM_LOGS</span>
-                    <ul id="log-list"></ul>
-                </div>
-                <div class="nav-section">
-                    <span class="section-title">CORE_VARS</span>
-                    <div class="var-box">API_STATUS: <span id="api-status">OFFLINE</span></div>
-                    <div class="var-box">ENCRYPTION: <span class="cyan-text">AES-256</span></div>
-                </div>
+            <div class="glass-pane nav-section">
+                <span class="section-title">LOG_STREAM</span>
+                <ul id="log-list" class="log-output"></ul>
             </div>
-            <div class="user-anchor">
-                <div class="avatar-box"></div>
+            <div class="glass-pane user-anchor">
+                <div class="avatar-container">
+                    <div id="hologram-avatar" class="hologram"></div>
+                </div>
                 <div class="user-info">
-                    <span class="username">GUEST_USER</span>
-                    <span class="rank">LEVEL_01</span>
+                    <span class="username">SYNAPTIC_NODE_01</span>
+                    <span class="rank">STATUS: SECURE</span>
                 </div>
             </div>
         </aside>
 
         <main id="main-terminal">
-            <nav class="top-bar">
-                <div class="breadcrumb">SESSION // ROOT // INTERFACE</div>
+            <nav class="top-bar glass-pane">
+                <div class="breadcrumb">CLUSTER // NEURAL_LINK // ACTIVE</div>
                 <div class="system-time" id="clock">00:00:00</div>
             </nav>
 
-            <section id="chat-viewport">
-                </section>
+            <section id="chat-viewport" class="glass-pane chat-display"></section>
 
             <footer id="input-sector">
                 <div class="input-glow"></div>
-                <div class="input-controls">
-                    <div class="status-dot"></div>
-                    <textarea id="userInput" placeholder="ENTER_COMMAND_HERE..." spellcheck="false"></textarea>
+                <div class="input-controls glass-pane">
+                    <div class="status-dot pulsating-dot"></div>
+                    <textarea id="userInput" placeholder="INITIATE_COMMAND_SEQUENCE..." spellcheck="false"></textarea>
                     <button id="execute-btn">
                         <span class="btn-text">EXECUTE</span>
-                        <span class="btn-sub">SHIFT + ENTER</span>
+                        <span class="btn-sub">CMD</span>
                     </button>
                 </div>
             </footer>
         </main>
     </div>
+
     <script src="config.js"></script>
     <script src="prompts.js"></script>
     <script src="auth.js"></script>
