@@ -4,8 +4,16 @@
  */
 
 const Config = {
-    key: "AIzaSyBNQy1oAirbT3gPibYlLjg8JYWIcVSpaDw", // මෙතනට ඔයාගේ Key එක දාන්න
-    endpoint: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+    key: "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", // මෙතනට Groq API Key එක දාන්න
+    endpoint: "https://api.groq.com/openai/v1/chat/completions",
+    model: "llama-3.3-70b-versatile", // Groq වල තියෙන පවර්ෆුල්ම මොඩල් එකක්
+    
+    modelSettings: {
+        temperature: 0.8,
+        max_tokens: 4096
+    }
+};
+
     
     modelSettings: {
         temperature: 1.0,
