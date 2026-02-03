@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="pyoniX.ai - Advanced Neural Interface">
+    <title>pyoniX.ai | Terminal_v2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="cyber-fx.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body class="no-scroll">
+    <div id="loader-overlay" class="loader-overlay">
+        <div class="loader-content">
+            <div class="glitch-text" data-text="PYONIX_INIT">PYONIX_INIT</div>
+            <div class="loading-bar"><div class="progress"></div></div>
+            <div id="loader-status">CONNECTING_TO_CORE...</div>
+        </div>
+    </div>
+
+    <div class="scanline"></div>
+    <div class="crt-overlay"></div>
+
+    <div id="app-grid">
+        <aside id="sidebar">
+            <div class="brand-box">
+                <h1 class="glitch" data-text="pyoniX.ai">pyoniX.ai</h1>
+                <span class="sub-label">NEURAL INTERFACE</span>
+            </div>
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="section-title">SYSTEM_LOGS</span>
+                    <ul id="log-list"></ul>
+                </div>
+                <div class="nav-section">
+                    <span class="section-title">CORE_VARS</span>
+                    <div class="var-box">API_STATUS: <span id="api-status">OFFLINE</span></div>
+                    <div class="var-box">ENCRYPTION: <span class="cyan-text">AES-256</span></div>
+                </div>
+            </div>
+            <div class="user-anchor">
+                <div class="avatar-box"></div>
+                <div class="user-info">
+                    <span class="username">GUEST_USER</span>
+                    <span class="rank">LEVEL_01</span>
+                </div>
+            </div>
+        </aside>
+
+        <main id="main-terminal">
+            <nav class="top-bar">
+                <div class="breadcrumb">SESSION // ROOT // INTERFACE</div>
+                <div class="system-time" id="clock">00:00:00</div>
+            </nav>
+
+            <section id="chat-viewport">
+                </section>
+
+            <footer id="input-sector">
+                <div class="input-glow"></div>
+                <div class="input-controls">
+                    <div class="status-dot"></div>
+                    <textarea id="userInput" placeholder="ENTER_COMMAND_HERE..." spellcheck="false"></textarea>
+                    <button id="execute-btn">
+                        <span class="btn-text">EXECUTE</span>
+                        <span class="btn-sub">SHIFT + ENTER</span>
+                    </button>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="prompts.js"></script>
+    <script src="auth.js"></script>
+    <script src="api-core.js"></script>
+    <script src="ui-engine.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
