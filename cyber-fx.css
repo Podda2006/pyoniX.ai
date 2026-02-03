@@ -1,0 +1,53 @@
+/** cyber-fx.css - Advanced Post-Processing Effects **/
+
+/* CRT Scanline Effect */
+.crt-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 3px, 3px 100%;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* Screen Flicker Animation */
+body::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: rgba(18, 16, 16, 0.1);
+    opacity: 0;
+    z-index: 1001;
+    pointer-events: none;
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.27861; }
+    5% { opacity: 0.34769; }
+    10% { opacity: 0.23604; }
+    15% { opacity: 0.90626; }
+    20% { opacity: 0.18128; }
+    100% { opacity: 0.1; }
+}
+
+/* Neon Glows for UI Elements */
+.msg-tag {
+    text-shadow: 0 0 5px var(--neon-red);
+    letter-spacing: 1px;
+}
+
+.cyan-text { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
+.neon-red-text { color: var(--neon-red); text-shadow: 0 0 8px var(--neon-red); }
+
+/* Message Bubble Styling */
+.msg-content {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
