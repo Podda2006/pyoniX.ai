@@ -1,0 +1,160 @@
+/**
+ * ==========================================================
+ * PROJECT: pyoniX.ai - Neural Interface Visual Engine
+ * MODULE: Glassmorphism & UI Overlays
+ * VERSION: 5.0.0-PRO (Dark Matter Edition)
+ * ==========================================================
+ * DESIGN PHILOSOPHY: 
+ * High-end frosted glass effects inspired by Apple iOS & 
+ * DeepSeek. Integrated with pyoniX Dragon-Core neon glow.
+ * ==========================================================
+ */
+
+/* # glass variable configuration */
+/* ග්ලාස් ඉෆෙක්ට් එක පාලනය කරන ප්‍රධාන විචල්‍යයන් */
+:root {
+    --glass-bg: rgba(2, 12, 27, 0.4);
+    --glass-border: rgba(0, 212, 255, 0.15);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+    --neon-flicker: rgba(204, 0, 255, 0.2);
+    --blur-strength: 20px;
+}
+
+/* # universal glass panel */
+/* ඕනෑම තැනකට පාවිච්චි කළ හැකි ප්‍රධාන ග්ලාස් පැනලය */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* # panel gloss overlay */
+/* පැනලය උඩින් වැටෙන ලස්සන ආලෝක කිරණක් (Gloss) */
+.glass-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.05) 0%, 
+        transparent 50%, 
+        rgba(0, 212, 255, 0.02) 100%
+    );
+    pointer-events: none;
+}
+
+/* # deep-dark neon borders */
+/* ලෝගෝ එකේ වර්ණ වලින් පැනල් එක වටේට වැටෙන Glow එක */
+.glass-panel-neon {
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.1), 
+                inset 0 0 10px rgba(204, 0, 255, 0.05);
+}
+
+/* # floating action glass */
+/* පෝන් එකේ උඩින් පාවෙන බොත්තම් සහ මෙනු සඳහා */
+.glass-float {
+    background: rgba(0, 8, 20, 0.6);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+/* # chat input station glass */
+/* යට තියෙන චැට් බොක්ස් එකේ පෙනුම */
+.glass-input-container {
+    background: rgba(10, 10, 15, 0.7);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 24px 24px 0 0;
+    transition: all 0.5s ease;
+}
+
+/* # input focus glow */
+/* ටයිප් කරන කොට චැට් බොක්ස් එක වටේට වැටෙන නිල් පාට එළිය */
+.glass-input-container:focus-within {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.25);
+    background: rgba(10, 10, 15, 0.85);
+}
+
+/* # modal overlay glass */
+/* සෙටින්ග්ස් වැනි මොඩල් පැනල් වල පසුබිම */
+.glass-modal-bg {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+/* # high-gloss button system */
+/* ලෝගෝ එකේ පර්පල් පාටින් දිලිසෙන බොත්තම් */
+.btn-glass {
+    background: linear-gradient(135deg, rgba(204, 0, 255, 0.1), rgba(0, 212, 255, 0.1));
+    border: 1px solid rgba(204, 0, 255, 0.3);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-glass:hover {
+    background: linear-gradient(135deg, rgba(204, 0, 255, 0.3), rgba(0, 212, 255, 0.3));
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(204, 0, 255, 0.2);
+    border-color: #cc00ff;
+}
+
+/* # profile card glass */
+/* යූසර්ගේ ප්‍රොෆයිල් එක පේන කොටස */
+.glass-user-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* # skeleton loading glass */
+/* මැසේජ් එකක් එන්න කලින් පේන හොල්මන් ඉරි කෑලි (Loading) */
+.glass-skeleton {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    background-size: 200% 100%;
+    animation: skeleton-slide 1.5s infinite linear;
+}
+
+/* # accessibility: reduced motion */
+/* ඇස් වලට අමාරු අයට ඇනිමේෂන් අඩු කිරීම */
+@media (prefers-reduced-motion: reduce) {
+    .glass-panel, .btn-glass {
+        backdrop-filter: none;
+        transition: none;
+    }
+}
+
+/* # animation frames */
+@keyframes skeleton-slide {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* # end of glass effects module */
