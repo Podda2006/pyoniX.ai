@@ -1,0 +1,300 @@
+/**
+ * ==========================================================
+ * PROJECT: pyoniX.ai - Neural Interface Visual Engine
+ * MODULE: Main Stylesheet (Deep-Dark Matrix)
+ * VERSION: 5.0.0-PRO
+ * ==========================================================
+ * DESIGN PHILOSOPHY: 
+ * High-contrast dark matter aesthetics inspired by DeepSeek 
+ * with Cyber-Neon accents from the pyoniX Dragon logo.
+ * ==========================================================
+ */
+
+/* # root design tokens */
+/* පද්ධතියේ ප්‍රධාන වර්ණ සහ විචල්‍යයන් */
+:root {
+    --bg-void: #000814;
+    --bg-panel: rgba(0, 18, 32, 0.7);
+    --neon-blue: #00d4ff;
+    --neon-purple: #cc00ff;
+    --text-main: #e0e6ed;
+    --text-dim: #94a3b8;
+    --border-glow: rgba(0, 212, 255, 0.3);
+    --glass-blur: blur(25px);
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --sidebar-width: 300px;
+    --glow-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+/* # system reset architecture */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: var(--bg-void);
+    color: var(--text-main);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* # custom neon scrollbar */
+/* සිහින් සහ ලස්සන ස්ක්‍රෝල් බාර් එක */
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
+    border-radius: 10px;
+}
+
+/* # app shell layout */
+#app-shell {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background: radial-gradient(circle at top right, rgba(0, 212, 255, 0.05), transparent);
+}
+
+/* # sidebar navigation style */
+/* වම් පැත්තේ තියෙන මෙනු එක */
+#main-sidebar {
+    width: var(--sidebar-width);
+    height: 100%;
+    background: var(--bg-panel);
+    backdrop-filter: var(--glass-blur);
+    border-right: 1px solid var(--border-glow);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    transition: var(--transition-fast);
+}
+
+.sidebar-header {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    border: 2px solid var(--neon-blue);
+    box-shadow: var(--glow-shadow);
+}
+
+.brand-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* # action zone aesthetics */
+.action-zone {
+    padding: 0 20px 20px;
+}
+
+.btn-primary-neon {
+    width: 100%;
+    padding: 14px;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.4s ease;
+}
+
+.btn-primary-neon:hover {
+    background: var(--neon-blue);
+    color: #000;
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
+}
+
+/* # chat history list */
+.history-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 15px;
+}
+
+.history-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-bottom: 15px;
+    padding-left: 10px;
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.log-stream li {
+    list-style: none;
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-dim);
+    transition: var(--transition-fast);
+}
+
+.log-stream li:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+}
+
+/* # main neural interface main */
+#neural-interface {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: transparent;
+}
+
+/* # top command bar */
+.glass-bar {
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.model-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff88;
+    animation: pulse 2s infinite;
+}
+
+/* # chat viewport engine */
+#chat-viewport {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px 15% 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* # message bubble design */
+.msg-container {
+    display: flex;
+    gap: 20px;
+    animation: fadeInUp 0.5s ease;
+}
+
+.msg-ai {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 20px;
+    border-radius: 20px;
+    border-left: 3px solid var(--neon-blue);
+}
+
+/* # input station styles */
+#input-station {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    z-index: 100;
+}
+
+.glass-input {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+#userInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    resize: none;
+    max-height: 200px;
+}
+
+/* # mobile responsiveness */
+/* පෝන් එකට සෙට් වෙන විදිහ */
+@media (max-width: 768px) {
+    #main-sidebar {
+        position: absolute;
+        left: -100%;
+        width: 85%;
+    }
+    #main-sidebar.active {
+        left: 0;
+    }
+    #chat-viewport {
+        padding: 20px 20px 150px;
+    }
+    #input-station {
+        width: 90%;
+        bottom: 15px;
+    }
+    .brand-name {
+        font-size: 1.2rem;
+    }
+}
+
+/* # keyframe animations */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* # end of stylesheet */
