@@ -1,0 +1,202 @@
+/**
+ * ==========================================================
+ * PROJECT: pyoniX.ai - Neural Interface Visual Engine
+ * MODULE: System Animations & Kinetic Motion
+ * VERSION: 5.0.0-PRO (Dark Matter Edition)
+ * ==========================================================
+ * DESIGN PHILOSOPHY: 
+ * High-performance CSS transitions with Cyber-glitch 
+ * aesthetics. Optimized for mobile processing units.
+ * ==========================================================
+ */
+
+/* # core motion variables */
+/* ඇනිමේෂන් වේගය සහ ස්වභාවය පාලනය කරන විචල්‍යයන් */
+:root {
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --glitch-duration: 0.4s;
+    --hover-lift: -5px;
+}
+
+/* # system boot animation */
+/* සයිට් එක මුලින්ම ලෝඩ් වෙද්දී ලෝගෝ එක Glitch වෙන විදිහ */
+.glitch-logo {
+    position: relative;
+    animation: main-glitch 3s infinite;
+}
+
+.glitch-logo::before,
+.glitch-logo::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.glitch-logo::before {
+    color: #00d4ff;
+    z-index: -1;
+    animation: glitch-offset 0.3s infinite;
+}
+
+.glitch-logo::after {
+    color: #cc00ff;
+    z-index: -2;
+    animation: glitch-offset 0.3s infinite reverse;
+}
+
+/* # message entrance frames */
+/* චැට් එකේ මැසේජ් එකක් උඩට එන ලස්සන ක්‍රමය */
+.msg-entrance {
+    animation: slide-up-fade 0.6s var(--ease-out-expo) forwards;
+    opacity: 0;
+}
+
+@keyframes slide-up-fade {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* # skeleton ghost loading */
+/* AI එක හිතන වෙලාවට පේන දිලිසෙන ඉරි කෑලි */
+.skeleton-shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+    to { background-position: 200% 0; }
+}
+
+/* # dragon breathing glow */
+/* ලෝගෝ එක පණ තියෙනවා වගේ හෙමින් දිලිසෙන එක */
+.dragon-breathe {
+    animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.5)); }
+    50% { filter: drop-shadow(0 0 25px rgba(204, 0, 255, 0.8)); }
+}
+
+/* # neural status pulse */
+/* සර්වර් එක ඔන්ලයින් කියලා පෙන්වන නිල් තිත ගැහෙන විදිහ */
+.pulse-online {
+    animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(0.33); opacity: 1; }
+    80%, 100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* # sidebar slide logic */
+/* පෝන් එකේ සයිඩ්බාර් එක එළියට එන වේගය */
+.sidebar-slide-in {
+    transition: transform 0.5s var(--ease-out-expo);
+}
+
+/* # cyber button hover */
+/* බොත්තම් උඩට ඇඟිල්ල තියද්දී වෙන වෙනස */
+.btn-hover-fx {
+    transition: all 0.3s var(--ease-out-expo);
+}
+
+.btn-hover-fx:active {
+    transform: scale(0.92);
+    filter: brightness(1.2);
+}
+
+/* # typing cursor blink */
+/* ටයිප් කරද්දී අගින් පේන ඉර ගැහෙන විදිහ */
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background: var(--neon-blue);
+    margin-left: 2px;
+    animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* # glitch effect frames */
+/* ප්‍රධාන Glitch ඇනිමේෂන් එකේ Frames */
+@keyframes main-glitch {
+    0% { transform: translate(0); }
+    10% { transform: translate(-2px, 2px); }
+    20% { transform: translate(-2px, -2px); }
+    30% { transform: translate(2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    50% { transform: translate(-2px, 2px); }
+    60% { transform: translate(0); }
+}
+
+@keyframes glitch-offset {
+    0% { clip-path: inset(80% 0 1% 0); }
+    20% { clip-path: inset(20% 0 60% 0); }
+    40% { clip-path: inset(40% 0 40% 0); }
+    60% { clip-path: inset(60% 0 20% 0); }
+    80% { clip-path: inset(10% 0 80% 0); }
+    100% { clip-path: inset(80% 0 1% 0); }
+}
+
+/* # modal popup zoom */
+/* සෙටින්ග්ස් පැනල් එක මැදින් පූප් වෙලා එන විදිහ */
+.modal-zoom {
+    animation: zoom-in 0.4s var(--ease-out-expo);
+}
+
+@keyframes zoom-in {
+    from { opacity: 0; transform: scale(0.8) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* # scroll reveal effects */
+/* පිටුව පල්ලෙහාට යද්දී දත්ත පේන්න ගන්නා විදිහ */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* # loading spinner rotation */
+/* රවුම කැරකෙන ඇනිමේෂන් එක */
+.cyber-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 212, 255, 0.1);
+    border-top: 3px solid var(--neon-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* # end of animation module */
