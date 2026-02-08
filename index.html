@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER-X | UNRESTRICTED AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050505; color: #e0e0e0; font-family: 'Inter', sans-serif; }
+        .glass { 
+            background: rgba(20, 20, 20, 0.7); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px; 
+        }
+        .neon-border:focus { 
+            border-color: #a855f7; 
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); 
+        }
+        .chat-scroll::-webkit-scrollbar { width: 4px; }
+        .chat-scroll::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    </style>
+</head>
+<body class="h-screen flex items-center justify-center p-4">
+
+    <div id="setup-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-6">
+        <div class="glass p-8 w-full max-w-md text-center">
+            <h1 class="text-3xl font-bold mb-6 text-purple-500 tracking-widest">CYBER-X SYSTEM</h1>
+            <input type="password" id="groq-key" placeholder="Enter Groq API Key" class="w-full p-4 mb-4 bg-black border border-zinc-800 rounded-2xl neon-border outline-none">
+            <input type="text" id="prompt-key" placeholder="Enter Prompt Access Key" class="w-full p-4 mb-6 bg-black border border-zinc-800 rounded-2xl neon-border outline-none">
+            <button onclick="startChat()" class="w-full bg-purple-600 p-4 rounded-2xl font-bold hover:bg-purple-700 transition">INITIALIZE ENGINE</button>
+        </div>
+    </div>
+
+    <div class="w-full max-w-4xl h-[90vh] glass flex flex-col overflow-hidden">
+        <div class="p-6 border-b border-zinc-800 flex justify-between items-center">
+            <span class="text-purple-400 font-mono tracking-tighter">● SYSTEM ACTIVE</span>
+            <span class="text-xs text-zinc-500">VERSION 3.0 (DEEP-KERNEL)</span>
+        </div>
+
+        <div id="chat-box" class="flex-1 overflow-y-auto p-6 chat-scroll space-y-4">
+            </div>
+
+        <div class="p-6 bg-zinc-900 bg-opacity-30">
+            <div class="relative">
+                <input type="text" id="user-input" placeholder="Query the system..." class="w-full p-5 pr-16 bg-black border border-zinc-800 rounded-3xl outline-none neon-border">
+                <button onclick="sendMessage()" class="absolute right-4 top-3.5 text-purple-500 text-2xl">⚡</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let chatHistory = [];
+        let groqKey = "";
+        let promptKey = "";
+
+        function startChat() {
+            groqKey = document.getElementById('groq-key').value;
+            promptKey = document.getElementById('prompt-key').value;
+            if(groqKey && promptKey) document.getElementById('setup-modal').classList.add('hidden');
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const msg = input.value;
+            if(!msg) return;
+
+            appendMessage('user', msg);
+            input.value = '';
+
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    message: msg,
+                    prompt_key: promptKey,
+                    groq_key: groqKey,
+                    history: chatHistory
+                })
+            });
+
+            const data = await response.json();
+            if(data.reply) {
+                appendMessage('ai', data.reply);
+                chatHistory.push({role: "user", content: msg});
+                chatHistory.push({role: "assistant", content: data.reply});
+                if(chatHistory.length > 20) chatHistory.shift(); // Keep last 10 pairs
+            } else {
+                appendMessage('ai', "Error: " + data.error);
+            }
+        }
+
+        function appendMessage(role, text) {
+            const box = document.getElementById('chat-box');
+            const div = document.createElement('div');
+            div.className = role === 'user' ? 'text-right' : 'text-left';
+            div.innerHTML = `<div class="inline-block p-4 rounded-3xl ${role === 'user' ? 'bg-purple-900 text-white rounded-br-none' : 'bg-zinc-800 text-zinc-200 rounded-bl-none'} max-w-[80%]">${text}</div>`;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+    </script>
+</body>
+</html>
